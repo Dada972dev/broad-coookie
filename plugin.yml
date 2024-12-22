@@ -1,0 +1,28 @@
+name: BroadcastPlugin
+main: broad\Main
+version: 1.0.0
+api: 5.0.0
+commands:
+  bc:
+    description: "Manage broadcast messages"
+    usage: "/bc <subcommand> [args]"
+    permission: "broadcastplugin.broadcast"
+permissions:
+  broadcastplugin.broadcast:
+    description: "Allows the player to broadcast a message"
+    default: op
+  broadcastplugin.forcebroadcast:
+    description: "Allows the player to force broadcast messages"
+    default: op
+  broadcastplugin.setbroadcastmessage:
+    description: "Allows the player to add a new automatic broadcast message"
+    default: op
+  broadcastplugin.setbroadcasttime:
+    description: "Allows the player to set the interval between automatic broadcasts"
+    default: op
+  broadcastplugin.delbroadcastmessage:
+    description: "Allows the player to delete a broadcast message by ID"
+    default: op
+  broadcastplugin.broadcastid:
+    description: "Allows the player to list all broadcast messages with their IDs"
+    default: op
