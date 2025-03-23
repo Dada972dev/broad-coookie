@@ -77,12 +77,17 @@ class Main extends PluginBase {
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool {
         if ($command->getName() === "bc") {
             if (empty($args)) {
-                $sender->sendMessage("Available subcommands:");
+                $sender->sendMessage("§a---Simple broadcast Available subcommands---");
                 $sender->sendMessage("/bc annonce <message> - Broadcast a message");
+                $sender->sendMessage("§4---------------------------------------------------");
                 $sender->sendMessage("/bc force - Force broadcast messages");
+                $sender->sendMessage("§4---------------------------------------------------");
                 $sender->sendMessage("/bc set time <seconds> - Set broadcast interval");
+                $sender->sendMessage("§4---------------------------------------------------");
                 $sender->sendMessage("/bc set message <message> - Add a new broadcast message");
+                $sender->sendMessage("§4---------------------------------------------------");
                 $sender->sendMessage("/bc delete <id> - Delete a broadcast message by ID");
+                $sender->sendMessage("§4---------------------------------------------------");
                 $sender->sendMessage("/bc id - List all broadcast messages with their IDs");
                 return true;
             }
@@ -92,7 +97,7 @@ class Main extends PluginBase {
             switch ($subCommand) {
                 case "annonce":
                     if (!$sender->hasPermission("broadcastplugin.broadcast")) {
-                        $sender->sendMessage("You do not have permission to use this command.");
+                        $sender->sendMessage("§4Error: §fYou do not have permission to use this command.");
                         return true;
                     }
                     if (empty($args)) {
@@ -105,11 +110,11 @@ class Main extends PluginBase {
 
                 case "force":
                     if (!$sender->hasPermission("broadcastplugin.forcebroadcast")) {
-                        $sender->sendMessage("You do not have permission to use this command.");
+                        $sender->sendMessage("§4Error: §fYou do not have permission to use this command.");
                         return true;
                     }
                     $this->forceBroadcast();
-                    $sender->sendMessage("Broadcast messages have been sent.");
+                    $sender->sendMessage("§aSucess: §fBroadcast messages have been sent.");
                     return true;
 
                 case "set":
@@ -123,7 +128,7 @@ class Main extends PluginBase {
                     switch ($setSubCommand) {
                         case "time":
                             if (!$sender->hasPermission("broadcastplugin.setbroadcasttime")) {
-                                $sender->sendMessage("You do not have permission to use this command.");
+                                $sender->sendMessage("§4Error: §fYou do not have permission to use this command.");
                                 return true;
                             }
                             if (empty($args) || !is_numeric($args[0])) {
@@ -132,12 +137,12 @@ class Main extends PluginBase {
                             }
                             $seconds = (int)$args[0];
                             $this->setBroadcastInterval($seconds);
-                            $sender->sendMessage("Broadcast interval set to $seconds seconds.");
+                            $sender->sendMessage("§aSucess: §fBroadcast interval set to $seconds seconds.");
                             return true;
 
                         case "message":
                             if (!$sender->hasPermission("broadcastplugin.setbroadcastmessage")) {
-                                $sender->sendMessage("You do not have permission to use this command.");
+                                $sender->sendMessage("§4Error: §fYou do not have permission to use this command.");
                                 return true;
                             }
                             if (empty($args)) {
@@ -146,7 +151,7 @@ class Main extends PluginBase {
                             }
                             $message = implode(" ", $args);
                             $this->addMessage($message);
-                            $sender->sendMessage("Broadcast message added.");
+                            $sender->sendMessage("§aSucess: §fBroadcast message added.");
                             return true;
 
                         default:
@@ -156,7 +161,7 @@ class Main extends PluginBase {
 
                 case "delete":
                     if (!$sender->hasPermission("broadcastplugin.delbroadcastmessage")) {
-                        $sender->sendMessage("You do not have permission to use this command.");
+                        $sender->sendMessage("§4Error: §fYou do not have permission to use this command.");
                         return true;
                     }
                     if (empty($args) || !is_numeric($args[0])) {
@@ -165,12 +170,12 @@ class Main extends PluginBase {
                     }
                     $id = (int)$args[0];
                     $this->deleteMessage($id);
-                    $sender->sendMessage("Broadcast message deleted.");
+                    $sender->sendMessage("§aSucess: §fBroadcast message deleted.");
                     return true;
 
                 case "id":
                     if (!$sender->hasPermission("broadcastplugin.broadcastid")) {
-                        $sender->sendMessage("You do not have permission to use this command.");
+                        $sender->sendMessage("§4Error: §fYou do not have permission to use this command.");
                         return true;
                     }
                     $messages = $this->getMessages();
@@ -180,7 +185,7 @@ class Main extends PluginBase {
                     return true;
 
                 default:
-                    $sender->sendMessage("Unknown subcommand: $subCommand");
+                    $sender->sendMessage("§4Error: §fUnknown subcommand: $subCommand");
                     return true;
             }
         }

@@ -1,10 +1,10 @@
-name: BroadcastPlugin
+name: Simple Broadcast
 main: broad\Main
 version: 1.0.0
 api: 5.0.0
 commands:
   bc:
-    description: "Manage broadcast messages"
+    description: "The most simple broadcast plugin"
     usage: "/bc <subcommand> [args]"
     permission: "broadcastplugin.broadcast"
 permissions:
